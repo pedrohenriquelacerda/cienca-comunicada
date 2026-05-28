@@ -28,6 +28,6 @@ export const SectionHeader = ({
     <p className={clsx('text-xs font-bold tracking-widest uppercase mb-2', EYEBROW_COLORS[eyebrowColor])}>
       {eyebrow}
     </p>
-    <h2 className="text-3xl font-bold text-cc-purple">{title}</h2>
+    <h2 className="font-display text-3xl font-black text-cc-purple">{title}</h2>
   </div>
 );

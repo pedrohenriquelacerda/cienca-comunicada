@@ -4,6 +4,7 @@
 
 @layer base {
   body {
-    @apply font-sans bg-slate-50 text-slate-900;
+    @apply font-sans bg-cc-cream text-cc-ink antialiased;
+    font-optical-sizing: auto;
   }
 }

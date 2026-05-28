@@ -36,7 +36,7 @@ const Modulos = () => (
       <p className="text-xs font-bold tracking-widest uppercase text-cc-teal mb-2">
         Conteúdo Dinâmico e API de Integração de Hubs
       </p>
-      <h2 className="text-3xl font-bold text-cc-purple">Módulos da Plataforma</h2>
+      <h2 className="font-display text-3xl font-black text-cc-purple">Módulos da Plataforma</h2>
     </header>
 
     {/* BANNER: ECOLOGIA SOCIOTÉCNICA */}

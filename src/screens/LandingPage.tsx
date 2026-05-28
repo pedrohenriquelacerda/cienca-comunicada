@@ -13,135 +13,134 @@ import {
 import { type LucideIcon } from 'lucide-react';
 
 const STEP_ICON_MAP: Record<ExperienceStep['iconName'], LucideIcon> = {
-  BookOpen,
-  UserCheck,
-  Play,
-  LineChart,
+  BookOpen, UserCheck, Play, LineChart,
 };
 
 const MODULE_COLOR_MAP: Record<ModuloData['colorKey'], { bg: string; text: string; border: string }> = {
   purple: { bg: 'bg-cc-purple', text: 'text-cc-purple', border: 'border-cc-purple' },
-  pink: { bg: 'bg-cc-pink', text: 'text-cc-pink', border: 'border-cc-pink' },
-  teal: { bg: 'bg-cc-teal', text: 'text-cc-teal', border: 'border-cc-teal' },
+  pink:   { bg: 'bg-cc-pink',   text: 'text-cc-pink',   border: 'border-cc-pink' },
+  teal:   { bg: 'bg-cc-teal',   text: 'text-cc-teal',   border: 'border-cc-teal' },
 };
 
 const LandingPage = () => (
   <>
-    {/* HERO */}
-    <section className="relative overflow-hidden bg-white pt-20 pb-16">
-      <div className="absolute inset-0 max-w-7xl mx-auto">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-cc-pink/10 rounded-full blur-3xl" />
-        <div className="absolute top-32 -left-24 w-72 h-72 bg-cc-teal/10 rounded-full blur-3xl" />
-      </div>
+    {/* ── HERO — Dark Editorial ─────────────────────────────────── */}
+    <section className="relative overflow-hidden bg-cc-ink min-h-[88vh] flex items-center py-20">
+      {/* Atmospheric depth */}
+      <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-cc-purple/50 rounded-full blur-[140px] -translate-y-48 translate-x-48 pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-cc-teal/10 rounded-full blur-[120px] translate-y-24 pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* PILLS TEMÁTICAS */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+
+        {/* Eixos temáticos */}
         <motion.ul
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           aria-label="Eixos temáticos"
-          className="flex flex-wrap justify-center gap-2 mb-8"
+          className="flex flex-wrap gap-2 mb-12"
         >
-          {TOPIC_TAGS.map((tag, i) => (
+          {TOPIC_TAGS.map((tag) => (
             <li key={tag}>
-              <span className={`px-4 py-1.5 rounded-full text-sm font-semibold border ${
-                i === 0 ? 'bg-cc-purple/10 text-cc-purple border-cc-purple/20' :
-                i === 1 ? 'bg-cc-pink/10 text-cc-pink border-cc-pink/20' :
-                i === 2 ? 'bg-cc-teal/10 text-cc-teal border-cc-teal/20' :
-                'bg-slate-100 text-slate-600 border-slate-200'
-              }`}>
+              <span className="px-4 py-1.5 rounded-full text-xs font-medium tracking-wide border border-white/20 text-white/55 bg-white/5">
                 {tag}
               </span>
             </li>
           ))}
         </motion.ul>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* TEXTO PRINCIPAL */}
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+
+          {/* Headline + CTAs */}
+          <div className="lg:col-span-3">
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              className="text-5xl md:text-6xl font-extrabold text-cc-purple tracking-tight mb-4"
+              transition={{ duration: 0.8 }}
+              className="font-display text-7xl md:text-8xl font-black text-white leading-none tracking-tight mb-4"
             >
-              Ciência Comunicada
+              Ciência<br />
+              <span className="italic font-light text-cc-pink">Comunicada</span>
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="text-sm font-bold tracking-widest uppercase text-cc-teal mb-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-xs font-bold tracking-[0.2em] uppercase text-cc-teal mb-6"
             >
               Ecossistema Criativo de Comunicação da Ciência
             </motion.p>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              className="text-lg text-slate-600 mb-8 leading-relaxed"
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="text-lg text-white/60 mb-10 leading-relaxed max-w-xl"
             >
-              Uma plataforma voltada para capacitar, visibilizar e conectar{' '}
-              <strong>mulheres cientistas</strong> no Brasil — transformando ciência em encontro
-              e ecossistema em transformação.
+              Uma plataforma para capacitar, visibilizar e conectar{' '}
+              <strong className="text-white font-semibold">mulheres cientistas</strong> no Brasil —
+              transformando ciência em encontro e ecossistema em transformação.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4"
+              transition={{ duration: 0.7, delay: 0.45 }}
+              className="flex flex-col sm:flex-row gap-3"
             >
               <Link
                 to="/app"
-                className="px-8 py-4 bg-cc-purple text-white rounded-full font-bold text-lg hover:bg-cc-purple/90 hover:scale-105 transition-all shadow-xl shadow-cc-purple/20 flex items-center justify-center gap-2"
+                className="px-8 py-4 bg-cc-pink text-white rounded-full font-bold text-base hover:bg-cc-pink/90 hover:scale-105 transition-all shadow-2xl shadow-cc-pink/25 flex items-center justify-center gap-2"
               >
-                Acessar a Plataforma <ArrowRight size={20} />
+                Acessar a Plataforma <ArrowRight size={18} />
               </Link>
               <a
                 href="#sobre"
-                className="px-8 py-4 bg-white text-cc-purple border border-slate-200 rounded-full font-bold text-lg hover:bg-slate-50 transition-all flex items-center justify-center"
+                className="px-8 py-4 text-white/75 border border-white/20 rounded-full font-medium text-base hover:bg-white/10 transition-all flex items-center justify-center"
               >
                 Conheça o Projeto
               </a>
             </motion.div>
           </div>
 
-          {/* TAGLINES */}
+          {/* Manifesto / Taglines */}
           <motion.aside
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
             aria-label="Propósito da plataforma"
-            className="bg-gradient-to-br from-cc-purple/5 to-cc-pink/5 border border-cc-purple/10 rounded-3xl p-8"
+            className="lg:col-span-2 lg:border-l lg:border-white/10 lg:pl-12"
           >
-            <ul className="space-y-5">
+            <p className="text-xs font-bold tracking-widest uppercase text-white/30 mb-6">
+              Manifesto
+            </p>
+            <ul className="space-y-6">
               {TAGLINES.map(({ prefix, emphasis }) => (
-                <li key={emphasis} className="text-2xl md:text-3xl font-light text-slate-700 leading-tight">
-                  {prefix}<strong className="font-extrabold text-cc-purple">{emphasis}</strong>.
+                <li key={emphasis}>
+                  <span className="font-display text-2xl md:text-[1.65rem] font-light text-white/40 leading-tight">
+                    {prefix}
+                  </span>
+                  <strong className="font-display block text-2xl md:text-[1.65rem] font-black text-white leading-tight">
+                    {emphasis}.
+                  </strong>
                 </li>
               ))}
             </ul>
           </motion.aside>
         </div>
 
-        {/* VALORES */}
+        {/* Valores */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mt-12 pt-8 border-t border-slate-100"
+          transition={{ delay: 0.7 }}
+          className="mt-16 pt-6 border-t border-white/10"
         >
-          <ul
-            aria-label="Valores da plataforma"
-            className="flex flex-wrap justify-center gap-x-8 gap-y-2"
-          >
+          <ul aria-label="Valores da plataforma" className="flex flex-wrap gap-x-8 gap-y-2">
             {VALUES.map((value, i) => (
-              <li key={value} className="flex items-center gap-2 text-slate-500 font-medium">
-                {i > 0 && <span className="text-slate-300" aria-hidden>•</span>}
+              <li key={value} className="flex items-center gap-3 text-white/30 text-sm font-medium">
+                {i > 0 && <span className="w-1 h-1 rounded-full bg-white/20" aria-hidden />}
                 {value}
               </li>
             ))}
@@ -150,19 +149,18 @@ const LandingPage = () => (
       </div>
     </section>
 
-    {/* SOBRE O PROJETO */}
-    <section id="sobre" className="py-24 bg-slate-50">
+    {/* ── SOBRE O PROJETO ───────────────────────────────────────── */}
+    <section id="sobre" className="py-24 bg-cc-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
-          {/* CARD VISUAL — EXPERIÊNCIA CENTRAL */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <div className="rounded-3xl bg-gradient-to-br from-cc-purple to-cc-pink p-8 text-white shadow-2xl">
-              <p className="text-cc-lavender text-xs font-bold tracking-widest uppercase mb-6 opacity-80">
+            <div className="rounded-3xl bg-gradient-to-br from-cc-purple to-cc-pink p-8 text-white shadow-2xl shadow-cc-purple/20">
+              <p className="text-cc-lavender/80 text-xs font-bold tracking-widest uppercase mb-6">
                 A Experiência Central
               </p>
               <ul className="space-y-5">
@@ -175,7 +173,7 @@ const LandingPage = () => (
                       </div>
                       <div>
                         <p className="font-bold text-white">{step.action}</p>
-                        <p className="text-xs text-cc-lavender opacity-80 mt-0.5">{step.tool}</p>
+                        <p className="text-xs text-cc-lavender/80 mt-0.5">{step.tool}</p>
                       </div>
                     </li>
                   );
@@ -184,14 +182,13 @@ const LandingPage = () => (
             </div>
           </motion.div>
 
-          {/* TEXTO */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
             <p className="text-xs font-bold tracking-widest text-cc-teal uppercase mb-3">Sobre o Projeto</p>
-            <h2 className="text-4xl font-extrabold text-cc-purple mb-6">
+            <h2 className="font-display text-4xl font-black text-cc-ink mb-6 leading-tight">
               Democratizando a ciência com voz e identidade.
             </h2>
             <p className="text-lg text-slate-600 mb-6 leading-relaxed">
@@ -208,14 +205,14 @@ const LandingPage = () => (
       </div>
     </section>
 
-    {/* TRILHAS — VISÃO GERAL */}
-    <section id="modulos" className="py-24 bg-white">
+    {/* ── TRILHAS ───────────────────────────────────────────────── */}
+    <section id="modulos" className="py-24 bg-white border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <p className="text-xs font-bold tracking-widest text-cc-pink uppercase mb-3">
             Ecologia Sociotécnica da Comunicação da Ciência
           </p>
-          <h2 className="text-4xl font-extrabold text-cc-purple">Trilhas de Aprendizagem</h2>
+          <h2 className="font-display text-4xl font-black text-cc-ink">Trilhas de Aprendizagem</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -228,17 +225,17 @@ const LandingPage = () => (
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="bg-slate-50 border border-slate-100 rounded-3xl p-8 hover:shadow-xl transition-all group"
+                whileHover={{ y: -6 }}
+                className="bg-cc-cream border border-slate-200/70 rounded-3xl p-8 hover:shadow-xl hover:shadow-cc-purple/5 transition-all"
               >
-                <div className={`w-12 h-12 rounded-2xl ${colors.bg} text-white flex items-center justify-center mb-6`}>
-                  <BookOpen size={24} />
+                <div className={`w-11 h-11 rounded-2xl ${colors.bg} text-white flex items-center justify-center mb-6`}>
+                  <BookOpen size={20} />
                 </div>
-                <h3 className={`text-xl font-bold mb-3 ${colors.text}`}>{mod.title}</h3>
-                <p className="text-slate-600 text-sm mb-6 leading-relaxed">{mod.description}</p>
-                <div className="flex items-center gap-4 text-sm text-slate-500">
-                  <span><strong className="text-slate-700">{mod.moduleCount}</strong> módulos</span>
-                  <span><strong className="text-slate-700">{mod.students}</strong> alunas</span>
+                <h3 className={`font-display text-xl font-black mb-3 ${colors.text}`}>{mod.title}</h3>
+                <p className="text-slate-500 text-sm mb-6 leading-relaxed">{mod.description}</p>
+                <div className="flex items-center gap-4 text-sm text-slate-400 border-t border-slate-200/60 pt-4">
+                  <span><strong className="text-slate-600">{mod.moduleCount}</strong> módulos</span>
+                  <span><strong className="text-slate-600">{mod.students}</strong> alunas</span>
                 </div>
               </motion.div>
             );
@@ -248,7 +245,7 @@ const LandingPage = () => (
         <div className="text-center mt-12">
           <Link
             to="/app"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-cc-purple text-white rounded-full font-bold hover:bg-cc-purple/90 transition-all shadow-lg shadow-cc-purple/20"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-cc-purple text-white rounded-full font-bold hover:bg-cc-ink transition-colors shadow-lg shadow-cc-purple/20"
           >
             Entrar na Plataforma <ArrowRight size={18} />
           </Link>

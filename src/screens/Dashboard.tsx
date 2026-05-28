@@ -31,7 +31,7 @@ const Dashboard = () => (
 
     {/* HEADER */}
     <header className="mb-8 p-8 bg-white rounded-3xl shadow-sm border border-slate-100">
-      <h2 className="text-3xl font-bold text-cc-purple mb-1">Olá, Maria!</h2>
+      <h2 className="font-display text-3xl font-black text-cc-purple mb-1">Olá, Maria!</h2>
       <p className="text-slate-500">Acompanhe seu progresso e o ecossistema da Ciência Comunicada.</p>
     </header>
 

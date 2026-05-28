@@ -38,7 +38,7 @@ const Hubs = () => {
           Conteúdo Dinâmico e API de Integração de Hubs
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <h2 className="text-3xl font-bold text-cc-purple">Acoplamento de Novos Hubs</h2>
+          <h2 className="font-display text-3xl font-black text-cc-purple">Acoplamento de Novos Hubs</h2>
           <span className="px-3 py-1 bg-cc-teal text-white text-xs font-bold rounded-full uppercase tracking-wider">
             Filtrável
           </span>
