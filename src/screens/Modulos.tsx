@@ -1,4 +1,4 @@
-import { BookOpen, Presentation, Radio, UserCheck, Play, LineChart, ChevronRight, type LucideIcon } from 'lucide-react';
+import { BookOpen, Presentation, Radio, UserCheck, Play, LineChart, ArrowRight, type LucideIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
 import {
   MODULOS,
@@ -9,137 +9,136 @@ import {
   type ExperienceStep,
 } from '../constants/platform';
 
-const MODULE_ICON_MAP: Record<ModuloData['iconName'], LucideIcon> = {
-  Radio,
-  Presentation,
-  BookOpen,
-};
+const MODULE_ICON_MAP: Record<ModuloData['iconName'], LucideIcon> = { Radio, Presentation, BookOpen };
+const STEP_ICON_MAP: Record<ExperienceStep['iconName'], LucideIcon>  = { BookOpen, UserCheck, Play, LineChart };
 
-const STEP_ICON_MAP: Record<ExperienceStep['iconName'], LucideIcon> = {
-  BookOpen,
-  UserCheck,
-  Play,
-  LineChart,
-};
-
-const MODULE_COLOR_MAP: Record<ModuloData['colorKey'], { bg: string; text: string; border: string }> = {
-  purple: { bg: 'bg-cc-purple', text: 'text-cc-purple', border: 'border-cc-purple' },
-  pink: { bg: 'bg-cc-pink', text: 'text-cc-pink', border: 'border-cc-pink' },
-  teal: { bg: 'bg-cc-teal', text: 'text-cc-teal', border: 'border-cc-teal' },
+const MODULE_COLOR_MAP: Record<ModuloData['colorKey'], { stripe: string; iconBg: string; text: string }> = {
+  purple: { stripe: 'bg-cc-purple', iconBg: 'bg-cc-purple', text: 'text-cc-purple' },
+  pink:   { stripe: 'bg-cc-pink',   iconBg: 'bg-cc-pink',   text: 'text-cc-pink'   },
+  teal:   { stripe: 'bg-cc-teal',   iconBg: 'bg-cc-teal',   text: 'text-cc-teal'   },
 };
 
 const Modulos = () => (
-  <div className="max-w-7xl mx-auto pb-12 space-y-12">
+  <div className="max-w-6xl mx-auto pb-8 space-y-8 sm:space-y-12">
 
-    {/* CABEÇALHO DE PÁGINA */}
+    {/* CABEÇALHO */}
     <header>
-      <p className="text-xs font-bold tracking-widest uppercase text-cc-teal mb-2">
-        Conteúdo Dinâmico e API de Integração de Hubs
-      </p>
-      <h2 className="font-display text-3xl font-black text-cc-purple">Módulos da Plataforma</h2>
+      <p className="text-xs font-bold tracking-widest uppercase text-cc-teal mb-2">Aprendizagem</p>
+      <h2 className="font-display text-2xl sm:text-3xl font-black text-cc-ink">Módulos da Plataforma</h2>
     </header>
 
-    {/* BANNER: ECOLOGIA SOCIOTÉCNICA */}
+    {/* CONCEITO CENTRAL — editorial, sem gradiente */}
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-cc-purple to-cc-pink text-white p-10 md:p-12 text-center shadow-lg"
+      transition={{ duration: 0.5 }}
+      className="bg-white border border-slate-100 rounded-2xl p-6 sm:p-8 md:p-10"
     >
-      <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-12 translate-x-12 pointer-events-none" />
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <h3 className="text-2xl md:text-4xl font-extrabold tracking-tight mb-5 text-transparent bg-clip-text bg-gradient-to-r from-white to-cc-lavender">
-          {CENTRAL_CONCEPT}
-        </h3>
-        <ul
-          aria-label="Eixos do ecossistema"
-          className="flex flex-wrap justify-center gap-3 text-sm md:text-base font-medium opacity-90"
-        >
+      <div className="flex flex-col md:flex-row md:items-start gap-5 sm:gap-6">
+        <div className="flex-1">
+          <p className="text-xs font-bold tracking-widest uppercase text-cc-pink mb-2 sm:mb-3">Conceito Central</p>
+          <h3 className="font-display text-xl sm:text-2xl font-black text-cc-ink leading-tight">
+            {CENTRAL_CONCEPT}
+          </h3>
+        </div>
+        <ul className="flex flex-wrap gap-2">
           {CENTRAL_CONCEPT_TAGS.map((tag) => (
             <li key={tag}>
-              <span className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm">{tag}</span>
+              <span className="px-3 py-1.5 rounded-lg bg-cc-lavender text-cc-purple text-xs font-semibold">
+                {tag}
+              </span>
             </li>
           ))}
         </ul>
       </div>
     </motion.div>
 
-    {/* A EXPERIÊNCIA CENTRAL */}
+    {/* A EXPERIÊNCIA CENTRAL — 1 col mobile, 2 cols sm, 4 cols md */}
     <section aria-labelledby="experiencia-heading">
-      <h3 id="experiencia-heading" className="text-xl font-bold text-cc-purple mb-6">
-        A Experiência Central da Plataforma
+      <h3
+        id="experiencia-heading"
+        className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 sm:mb-6"
+      >
+        A Experiência Central
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
         {EXPERIENCE_STEPS.map((step, i) => {
           const Icon = STEP_ICON_MAP[step.iconName];
           return (
-            <div key={step.num} className="relative flex flex-col items-center text-center bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-              <div className="w-10 h-10 rounded-full bg-cc-purple text-white flex items-center justify-center font-black text-sm mb-3 shrink-0">
-                {step.num}
+            <div
+              key={step.num}
+              className="bg-white rounded-xl p-4 sm:p-5 border border-slate-100 flex items-start gap-3"
+            >
+              <span className="w-6 h-6 rounded-md bg-cc-purple text-white flex items-center justify-center font-black text-[11px] shrink-0 mt-0.5">
+                {i + 1}
+              </span>
+              <div>
+                <div className="flex items-center gap-1.5 mb-1">
+                  <div className="w-6 h-6 rounded-md bg-slate-50 flex items-center justify-center text-slate-400 shrink-0">
+                    <Icon size={13} />
+                  </div>
+                </div>
+                <h4 className="font-semibold text-slate-800 text-sm leading-snug mb-1">{step.action}</h4>
+                <p className="text-xs text-slate-400 leading-relaxed">{step.tool}</p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-cc-purple/5 text-cc-purple flex items-center justify-center mb-3">
-                <Icon size={22} />
-              </div>
-              <h4 className="font-bold text-slate-800 mb-1 text-sm">{step.action}</h4>
-              <p className="text-xs font-medium text-slate-400 uppercase tracking-wider leading-relaxed">
-                {step.tool}
-              </p>
-              {i < EXPERIENCE_STEPS.length - 1 && (
-                <ChevronRight
-                  size={18}
-                  className="hidden md:block absolute top-1/2 -right-3 -translate-y-1/2 text-slate-300 z-10"
-                />
-              )}
             </div>
           );
         })}
       </div>
     </section>
 
-    {/* TRILHAS DE APRENDIZAGEM */}
+    {/* TRILHAS DE APRENDIZAGEM — 1 col mobile, 2 cols sm, 3 cols lg */}
     <section aria-labelledby="trilhas-heading">
-      <h3 id="trilhas-heading" className="text-xl font-bold text-cc-purple mb-6">
+      <h3
+        id="trilhas-heading"
+        className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4 sm:mb-6"
+      >
         Trilhas de Aprendizagem
       </h3>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         {MODULOS.map((mod, i) => {
           const Icon = MODULE_ICON_MAP[mod.iconName];
           const colors = MODULE_COLOR_MAP[mod.colorKey];
           return (
             <motion.article
               key={mod.id}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden flex flex-col group"
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="group bg-white rounded-2xl border border-slate-100 hover:border-slate-200 hover:shadow-md transition-all overflow-hidden flex flex-col"
             >
-              <div className={`h-2 ${colors.bg}`} />
-              <div className="p-6 flex-1 flex flex-col">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${colors.bg} text-white`}>
-                  <Icon size={24} />
-                </div>
-                <h4 className="text-xl font-bold text-slate-800 mb-2">{mod.title}</h4>
-                <p className="text-slate-600 text-sm mb-6 flex-1">{mod.description}</p>
+              <div className={`h-1 ${colors.stripe}`} />
 
-                <div className="grid grid-cols-3 gap-2 border-t border-slate-100 pt-4 mb-6">
+              <div className="p-5 sm:p-6 flex-1 flex flex-col">
+                <div className={`w-10 sm:w-11 h-10 sm:h-11 rounded-xl ${colors.iconBg} text-white flex items-center justify-center mb-4 sm:mb-5`}>
+                  <Icon size={20} />
+                </div>
+                <h4 className="font-display text-base sm:text-lg font-black text-slate-800 mb-2 leading-snug">
+                  {mod.title}
+                </h4>
+                <p className="text-slate-500 text-sm mb-5 sm:mb-6 flex-1 leading-relaxed">{mod.description}</p>
+
+                <div className="grid grid-cols-3 border-t border-slate-100 pt-4 mb-5">
                   <div className="text-center">
-                    <p className="text-xs text-slate-400 font-medium">Módulos</p>
-                    <p className="font-bold text-slate-700">{mod.moduleCount}</p>
+                    <p className="text-[10px] text-slate-400 font-medium mb-0.5">Módulos</p>
+                    <p className="font-bold text-slate-700 text-sm">{mod.moduleCount}</p>
                   </div>
                   <div className="text-center border-l border-slate-100">
-                    <p className="text-xs text-slate-400 font-medium">Alunas</p>
-                    <p className="font-bold text-slate-700">{mod.students}</p>
+                    <p className="text-[10px] text-slate-400 font-medium mb-0.5">Alunas</p>
+                    <p className="font-bold text-slate-700 text-sm">{mod.students}</p>
                   </div>
                   <div className="text-center border-l border-slate-100">
-                    <p className="text-xs text-slate-400 font-medium">Certificados</p>
-                    <p className="font-bold text-slate-700">{mod.certs}</p>
+                    <p className="text-[10px] text-slate-400 font-medium mb-0.5">Certificados</p>
+                    <p className="font-bold text-slate-700 text-sm">{mod.certs}</p>
                   </div>
                 </div>
 
                 <button
-                  className={`w-full py-3 rounded-xl font-bold border-2 transition-colors ${colors.text} ${colors.border} hover:${colors.bg} hover:text-white`}
+                  className={`w-full py-2.5 rounded-xl font-bold text-sm border-2 transition-colors ${colors.text} border-current hover:bg-current hover:text-white`}
                 >
-                  Acessar Trilha
+                  <span className="flex items-center justify-center gap-1.5">
+                    Acessar Trilha <ArrowRight size={14} />
+                  </span>
                 </button>
               </div>
             </motion.article>

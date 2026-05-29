@@ -121,3 +121,37 @@ export const PILLARS: PillarData[] = [
   { id: 'repositorio', title: 'Repositório', desc: 'Dados Abertos, Arquivos', status: 'Operacional', iconName: 'Archive', colorKey: 'dark' },
   { id: 'eventos', title: 'Eventos & Redes', desc: 'Fórum Comunitário, Conexões', status: 'Operacional', iconName: 'MessagesSquare', colorKey: 'grape' },
 ];
+
+export const PLATFORM_SLOGAN = 'Ecossistema colaborativo de comunicação da ciência.';
+
+export interface MainPillar {
+  id: string;
+  number: string;
+  title: string;
+  description: string;
+  iconName: 'GraduationCap' | 'Radio' | 'Network';
+}
+
+export const MAIN_PILLARS: MainPillar[] = [
+  {
+    id: 'formacao',
+    number: '01',
+    title: 'Formação',
+    description: 'Trilhas de aprendizagem, cursos, oficinas e materiais educativos para desenvolver competências em comunicação científica.',
+    iconName: 'GraduationCap',
+  },
+  {
+    id: 'comunicacao',
+    number: '02',
+    title: 'Comunicação Científica',
+    description: 'Ferramentas para criar, publicar e distribuir conteúdo: artigos, vídeos, podcasts, campanhas e divulgação de pesquisas.',
+    iconName: 'Radio',
+  },
+  {
+    id: 'rede',
+    number: '03',
+    title: 'Rede Colaborativa',
+    description: 'Conexão entre pesquisadoras, comunicadores e comunidades por meio de perfis, grupos, hubs temáticos e eventos.',
+    iconName: 'Network',
+  },
+];

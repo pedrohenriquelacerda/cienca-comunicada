@@ -1,38 +1,64 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
-export const TopNav = () => (
-  <header className="bg-cc-cream border-b border-slate-200/70 sticky top-0 z-50">
-    {/* Brand accent stripe */}
-    <div className="h-[3px] bg-cc-pink w-full" />
+export const TopNav = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const close = () => setMenuOpen(false);
 
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex justify-between items-center h-16">
+  return (
+    <header className="bg-white/95 backdrop-blur-sm border-b border-slate-100 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
 
-        <div className="flex items-center gap-2.5">
-          <div className="bg-cc-ink text-white p-2 rounded-xl">
-            <BookOpen size={20} />
-          </div>
-          <Link to="/" className="font-display text-xl font-black tracking-tight text-cc-ink">
-            Ciência Comunicada
+          <Link to="/" onClick={close} className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg bg-cc-purple flex items-center justify-center shrink-0">
+              <span className="text-white text-[10px] font-black leading-none">CC</span>
+            </div>
+            <span className="font-display text-lg font-black tracking-tight text-cc-ink">
+              Ciência Comunicada
+            </span>
           </Link>
+
+          <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-400">
+            <a href="#sobre"   className="hover:text-cc-ink transition-colors">Sobre</a>
+            <a href="#pilares" className="hover:text-cc-ink transition-colors">Pilares</a>
+            <a href="#modulos" className="hover:text-cc-ink transition-colors">Módulos</a>
+            <Link to="/app/hubs" className="hover:text-cc-ink transition-colors">Hubs</Link>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <Link
+              to="/app"
+              className="px-4 sm:px-5 py-2 rounded-xl bg-cc-purple text-white text-sm font-bold hover:bg-cc-ink transition-colors"
+            >
+              Entrar
+            </Link>
+            <button
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'}
+              aria-expanded={menuOpen}
+              className="md:hidden w-9 h-9 flex items-center justify-center text-slate-500 hover:text-cc-ink rounded-lg hover:bg-slate-50 transition-colors"
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+
         </div>
-
-        <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
-          <a href="#sobre" className="hover:text-cc-ink transition-colors">Sobre o Projeto</a>
-          <a href="#modulos" className="hover:text-cc-ink transition-colors">Módulos</a>
-          <Link to="/app/hubs" className="hover:text-cc-ink transition-colors">Hubs</Link>
-          <Link to="/app/infraestrutura" className="hover:text-cc-ink transition-colors">Infraestrutura</Link>
-        </nav>
-
-        <Link
-          to="/app"
-          className="px-5 py-2 rounded-full bg-cc-purple text-white text-sm font-bold hover:bg-cc-ink transition-colors"
-        >
-          Entrar na Plataforma
-        </Link>
-
       </div>
-    </div>
-  </header>
-);
+
+      {/* Menu mobile */}
+      {menuOpen && (
+        <nav
+          aria-label="Navegação mobile"
+          className="md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-0.5"
+        >
+          <a href="#sobre"   onClick={close} className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-cc-ink transition-colors">Sobre</a>
+          <a href="#pilares" onClick={close} className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-cc-ink transition-colors">Pilares</a>
+          <a href="#modulos" onClick={close} className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-cc-ink transition-colors">Módulos</a>
+          <Link to="/app/hubs" onClick={close} className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-cc-ink transition-colors">Hubs</Link>
+        </nav>
+      )}
+    </header>
+  );
+};

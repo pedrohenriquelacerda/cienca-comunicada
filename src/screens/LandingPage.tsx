@@ -1,146 +1,131 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, Play, LineChart, UserCheck } from 'lucide-react';
+import { ArrowRight, BookOpen, Play, LineChart, UserCheck, GraduationCap, Radio, Network, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
   TAGLINES,
-  TOPIC_TAGS,
   VALUES,
   EXPERIENCE_STEPS,
   MODULOS,
+  MAIN_PILLARS,
+  PLATFORM_SLOGAN,
   type ExperienceStep,
   type ModuloData,
+  type MainPillar,
 } from '../constants/platform';
-import { type LucideIcon } from 'lucide-react';
 
 const STEP_ICON_MAP: Record<ExperienceStep['iconName'], LucideIcon> = {
   BookOpen, UserCheck, Play, LineChart,
 };
 
-const MODULE_COLOR_MAP: Record<ModuloData['colorKey'], { bg: string; text: string; border: string }> = {
-  purple: { bg: 'bg-cc-purple', text: 'text-cc-purple', border: 'border-cc-purple' },
-  pink:   { bg: 'bg-cc-pink',   text: 'text-cc-pink',   border: 'border-cc-pink' },
-  teal:   { bg: 'bg-cc-teal',   text: 'text-cc-teal',   border: 'border-cc-teal' },
+const MODULE_COLOR_MAP: Record<ModuloData['colorKey'], { dot: string; text: string }> = {
+  purple: { dot: 'bg-cc-purple', text: 'text-cc-purple' },
+  pink:   { dot: 'bg-cc-pink',   text: 'text-cc-pink'   },
+  teal:   { dot: 'bg-cc-teal',   text: 'text-cc-teal'   },
+};
+
+const PILLAR_ICON_MAP: Record<MainPillar['iconName'], LucideIcon> = {
+  GraduationCap, Radio, Network,
 };
 
 const LandingPage = () => (
   <>
-    {/* ── HERO — Dark Editorial ─────────────────────────────────── */}
-    <section className="relative overflow-hidden bg-cc-ink min-h-[88vh] flex items-center py-20">
-      {/* Atmospheric depth */}
-      <div className="absolute top-0 right-0 w-[700px] h-[700px] bg-cc-purple/50 rounded-full blur-[140px] -translate-y-48 translate-x-48 pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-cc-teal/10 rounded-full blur-[120px] translate-y-24 pointer-events-none" />
+    {/* ── HERO ─────────────────────────────────────────────────── */}
+    <section className="bg-cc-ink flex items-center py-16 sm:py-20 md:py-24 relative overflow-hidden">
+      {/* Acento sutil no canto — não são orbs flutuantes */}
+      <div className="absolute top-0 right-0 w-64 sm:w-80 h-64 sm:h-80 bg-gradient-to-bl from-cc-purple/20 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-cc-teal/8 to-transparent pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-
-        {/* Eixos temáticos */}
-        <motion.ul
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          aria-label="Eixos temáticos"
-          className="flex flex-wrap gap-2 mb-12"
-        >
-          {TOPIC_TAGS.map((tag) => (
-            <li key={tag}>
-              <span className="px-4 py-1.5 rounded-full text-xs font-medium tracking-wide border border-white/20 text-white/55 bg-white/5">
-                {tag}
-              </span>
-            </li>
-          ))}
-        </motion.ul>
-
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 items-center">
 
           {/* Headline + CTAs */}
           <div className="lg:col-span-3">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-cc-teal mb-6 sm:mb-8"
+            >
+              Ecossistema Criativo de Comunicação da Ciência
+            </motion.p>
+
             <motion.h1
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="font-display text-7xl md:text-8xl font-black text-white leading-none tracking-tight mb-4"
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black text-white leading-none tracking-tight mb-5 sm:mb-6"
             >
               Ciência<br />
               <span className="italic font-light text-cc-pink">Comunicada</span>
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xs font-bold tracking-[0.2em] uppercase text-cc-teal mb-6"
-            >
-              Ecossistema Criativo de Comunicação da Ciência
-            </motion.p>
-
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-lg text-white/60 mb-10 leading-relaxed max-w-xl"
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="text-base sm:text-lg text-white/50 mb-8 sm:mb-10 leading-relaxed max-w-md"
             >
-              Uma plataforma para capacitar, visibilizar e conectar{' '}
-              <strong className="text-white font-semibold">mulheres cientistas</strong> no Brasil —
-              transformando ciência em encontro e ecossistema em transformação.
+              {PLATFORM_SLOGAN}
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.45 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-3"
             >
               <Link
                 to="/app"
-                className="px-8 py-4 bg-cc-pink text-white rounded-full font-bold text-base hover:bg-cc-pink/90 hover:scale-105 transition-all shadow-2xl shadow-cc-pink/25 flex items-center justify-center gap-2"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 bg-cc-pink text-white rounded-xl font-bold text-sm hover:bg-cc-pink/90 transition-colors shadow-lg shadow-cc-pink/20"
               >
-                Acessar a Plataforma <ArrowRight size={18} />
+                Explorar Plataforma <ArrowRight size={16} />
               </Link>
               <a
-                href="#sobre"
-                className="px-8 py-4 text-white/75 border border-white/20 rounded-full font-medium text-base hover:bg-white/10 transition-all flex items-center justify-center"
+                href="#pilares"
+                className="inline-flex items-center justify-center px-6 sm:px-7 py-3 sm:py-3.5 text-white/55 border border-white/12 rounded-xl font-medium text-sm hover:bg-white/5 hover:text-white/75 transition-colors"
               >
-                Conheça o Projeto
+                Conhecer Projetos
               </a>
             </motion.div>
           </div>
 
-          {/* Manifesto / Taglines */}
+          {/* Manifesto — visível em todas as telas, abaixo do headline */}
           <motion.aside
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-            aria-label="Propósito da plataforma"
-            className="lg:col-span-2 lg:border-l lg:border-white/10 lg:pl-12"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.35 }}
+            aria-label="Manifesto da plataforma"
+            className="lg:col-span-2 pt-6 border-t border-white/[0.07] lg:border-t-0 lg:border-l lg:pl-12 lg:pt-0"
           >
-            <p className="text-xs font-bold tracking-widest uppercase text-white/30 mb-6">
+            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-white/20 mb-6 sm:mb-8">
               Manifesto
             </p>
-            <ul className="space-y-6">
+            <ul className="space-y-5 sm:space-y-7">
               {TAGLINES.map(({ prefix, emphasis }) => (
                 <li key={emphasis}>
-                  <span className="font-display text-2xl md:text-[1.65rem] font-light text-white/40 leading-tight">
+                  <p className="font-display text-lg sm:text-xl font-light text-white/25 leading-snug">
                     {prefix}
-                  </span>
-                  <strong className="font-display block text-2xl md:text-[1.65rem] font-black text-white leading-tight">
+                  </p>
+                  <p className="font-display text-lg sm:text-xl font-black text-white leading-snug">
                     {emphasis}.
-                  </strong>
+                  </p>
                 </li>
               ))}
             </ul>
           </motion.aside>
         </div>
 
-        {/* Valores */}
+        {/* Values strip */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          className="mt-16 pt-6 border-t border-white/10"
+          transition={{ delay: 0.7, duration: 0.5 }}
+          className="mt-14 sm:mt-20 pt-5 sm:pt-6 border-t border-white/[0.07]"
         >
-          <ul aria-label="Valores da plataforma" className="flex flex-wrap gap-x-8 gap-y-2">
+          <ul aria-label="Valores da plataforma" className="flex flex-wrap gap-x-6 sm:gap-x-8 gap-y-2">
             {VALUES.map((value, i) => (
-              <li key={value} className="flex items-center gap-3 text-white/30 text-sm font-medium">
-                {i > 0 && <span className="w-1 h-1 rounded-full bg-white/20" aria-hidden />}
+              <li key={value} className="flex items-center gap-2 sm:gap-2.5 text-white/20 text-xs sm:text-sm font-medium">
+                {i > 0 && <span className="w-1 h-1 rounded-full bg-white/12" aria-hidden />}
                 {value}
               </li>
             ))}
@@ -149,54 +134,104 @@ const LandingPage = () => (
       </div>
     </section>
 
-    {/* ── SOBRE O PROJETO ───────────────────────────────────────── */}
-    <section id="sobre" className="py-24 bg-cc-cream">
+    {/* ── 3 PILARES ─────────────────────────────────────────────── */}
+    <section id="pilares" className="py-16 sm:py-20 md:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div className="max-w-xl mb-12 sm:mb-16">
+          <p className="text-xs font-bold tracking-widest text-cc-teal uppercase mb-3">
+            Como funciona
+          </p>
+          <h2 className="font-display text-3xl sm:text-4xl font-black text-cc-ink leading-tight">
+            Três pilares,<br />um ecossistema.
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          {MAIN_PILLARS.map((pillar, i) => {
+            const Icon = PILLAR_ICON_MAP[pillar.iconName];
+            return (
+              <motion.div
+                key={pillar.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.55 }}
+                className="group p-6 sm:p-8 border border-slate-100 rounded-2xl bg-cc-cream hover:border-slate-200 hover:shadow-sm transition-all"
+              >
+                <div className="flex items-start justify-between mb-5 sm:mb-7">
+                  <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center text-slate-400 group-hover:border-slate-200 transition-colors">
+                    <Icon size={19} />
+                  </div>
+                  <span className="font-display text-4xl sm:text-5xl font-black text-slate-100 leading-none select-none">
+                    {pillar.number}
+                  </span>
+                </div>
+                <h3 className="font-display text-lg sm:text-xl font-black text-cc-ink mb-2 sm:mb-3">
+                  {pillar.title}
+                </h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{pillar.description}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    {/* ── SOBRE O PROJETO ───────────────────────────────────────── */}
+    <section id="sobre" className="py-16 sm:py-20 md:py-24 bg-cc-cream border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start">
 
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="rounded-3xl bg-gradient-to-br from-cc-purple to-cc-pink p-8 text-white shadow-2xl shadow-cc-purple/20">
-              <p className="text-cc-lavender/80 text-xs font-bold tracking-widest uppercase mb-6">
-                A Experiência Central
-              </p>
-              <ul className="space-y-5">
-                {EXPERIENCE_STEPS.map((step) => {
-                  const Icon = STEP_ICON_MAP[step.iconName];
-                  return (
-                    <li key={step.num} className="flex items-start gap-4">
-                      <div className="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center shrink-0">
-                        <Icon size={18} className="text-white" />
-                      </div>
-                      <div>
-                        <p className="font-bold text-white">{step.action}</p>
-                        <p className="text-xs text-cc-lavender/80 mt-0.5">{step.tool}</p>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            <p className="text-xs font-bold tracking-widest text-cc-pink uppercase mb-3">
+              A Experiência Central
+            </p>
+            <h2 className="font-display text-2xl sm:text-3xl font-black text-cc-ink mb-8 sm:mb-10 leading-tight">
+              Formação, divulgação<br />e impacto social.
+            </h2>
+
+            <ol className="space-y-5 sm:space-y-6">
+              {EXPERIENCE_STEPS.map((step) => {
+                const Icon = STEP_ICON_MAP[step.iconName];
+                return (
+                  <li key={step.num} className="flex items-start gap-4 sm:gap-5">
+                    <div className="w-9 h-9 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-cc-purple shrink-0 mt-0.5">
+                      <Icon size={17} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-cc-ink text-sm sm:text-base">{step.action}</p>
+                      <p className="text-xs sm:text-sm text-slate-400 mt-0.5">{step.tool}</p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 16 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="pt-0 md:pt-2"
           >
-            <p className="text-xs font-bold tracking-widest text-cc-teal uppercase mb-3">Sobre o Projeto</p>
-            <h2 className="font-display text-4xl font-black text-cc-ink mb-6 leading-tight">
+            <p className="text-xs font-bold tracking-widest text-cc-teal uppercase mb-3">
+              Sobre o Projeto
+            </p>
+            <h2 className="font-display text-2xl sm:text-3xl font-black text-cc-ink mb-5 sm:mb-7 leading-tight">
               Democratizando a ciência com voz e identidade.
             </h2>
-            <p className="text-lg text-slate-600 mb-6 leading-relaxed">
-              A <strong>Ciência Comunicada</strong> atua na interseção do jornalismo, relações
-              públicas e formação acadêmica para dar destaque à produção de cientistas mulheres
-              em diversos territórios e identidades.
+            <p className="text-slate-600 mb-4 sm:mb-5 leading-relaxed text-sm sm:text-base">
+              A <strong className="text-cc-ink font-bold">Ciência Comunicada</strong> atua na
+              interseção do jornalismo, relações públicas e formação acadêmica para amplificar a
+              produção de cientistas mulheres em diversos territórios e identidades.
             </p>
-            <p className="text-slate-500 leading-relaxed">
+            <p className="text-slate-500 text-sm leading-relaxed">
               O ecossistema integra ensino, pesquisa e extensão por meio de práticas relacionais
               únicas, conectando hubs temáticos e infraestrutura aberta para novas comunidades.
             </p>
@@ -205,49 +240,66 @@ const LandingPage = () => (
       </div>
     </section>
 
-    {/* ── TRILHAS ───────────────────────────────────────────────── */}
-    <section id="modulos" className="py-24 bg-white border-t border-slate-100">
+    {/* ── TRILHAS DE APRENDIZAGEM ───────────────────────────────── */}
+    <section id="modulos" className="py-16 sm:py-20 md:py-24 bg-white border-t border-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <p className="text-xs font-bold tracking-widest text-cc-pink uppercase mb-3">
-            Ecologia Sociotécnica da Comunicação da Ciência
-          </p>
-          <h2 className="font-display text-4xl font-black text-cc-ink">Trilhas de Aprendizagem</h2>
+
+        <div className="flex flex-wrap items-end justify-between gap-4 mb-10 sm:mb-14">
+          <div>
+            <p className="text-xs font-bold tracking-widest text-cc-pink uppercase mb-3">
+              Trilhas de Aprendizagem
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl font-black text-cc-ink">
+              Módulos da Plataforma
+            </h2>
+          </div>
+          <Link
+            to="/app"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-cc-purple hover:text-cc-ink transition-colors"
+          >
+            Ver todos <ArrowRight size={15} />
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {MODULOS.map((mod, i) => {
             const colors = MODULE_COLOR_MAP[mod.colorKey];
             return (
               <motion.div
                 key={mod.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ y: -6 }}
-                className="bg-cc-cream border border-slate-200/70 rounded-3xl p-8 hover:shadow-xl hover:shadow-cc-purple/5 transition-all"
+                transition={{ delay: i * 0.1, duration: 0.5 }}
+                className="group bg-cc-cream border border-slate-100 rounded-2xl p-6 sm:p-7 hover:shadow-md hover:border-slate-200 transition-all"
               >
-                <div className={`w-11 h-11 rounded-2xl ${colors.bg} text-white flex items-center justify-center mb-6`}>
-                  <BookOpen size={20} />
-                </div>
-                <h3 className={`font-display text-xl font-black mb-3 ${colors.text}`}>{mod.title}</h3>
-                <p className="text-slate-500 text-sm mb-6 leading-relaxed">{mod.description}</p>
-                <div className="flex items-center gap-4 text-sm text-slate-400 border-t border-slate-200/60 pt-4">
-                  <span><strong className="text-slate-600">{mod.moduleCount}</strong> módulos</span>
-                  <span><strong className="text-slate-600">{mod.students}</strong> alunas</span>
+                <div className={`w-2 h-2 rounded-full ${colors.dot} mb-5 sm:mb-6`} />
+                <h3 className={`font-display text-base sm:text-lg font-black mb-2 sm:mb-3 leading-snug ${colors.text}`}>
+                  {mod.title}
+                </h3>
+                <p className="text-slate-500 text-sm mb-6 sm:mb-7 leading-relaxed">{mod.description}</p>
+                <div className="flex flex-wrap items-center gap-4 sm:gap-5 text-sm border-t border-slate-200/70 pt-4 sm:pt-5">
+                  <span className="text-slate-400">
+                    <strong className="text-slate-600 font-bold">{mod.moduleCount}</strong> módulos
+                  </span>
+                  <span className="text-slate-400">
+                    <strong className="text-slate-600 font-bold">{mod.students}</strong> alunas
+                  </span>
+                  <span className="text-slate-400">
+                    <strong className="text-slate-600 font-bold">{mod.certs}</strong> certs.
+                  </span>
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-10 sm:mt-14">
           <Link
             to="/app"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-cc-purple text-white rounded-full font-bold hover:bg-cc-ink transition-colors shadow-lg shadow-cc-purple/20"
+            className="inline-flex items-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 bg-cc-purple text-white rounded-xl font-bold text-sm sm:text-base hover:bg-cc-ink transition-colors shadow-lg shadow-cc-purple/15"
           >
-            Entrar na Plataforma <ArrowRight size={18} />
+            Entrar na Plataforma <ArrowRight size={17} />
           </Link>
         </div>
       </div>
