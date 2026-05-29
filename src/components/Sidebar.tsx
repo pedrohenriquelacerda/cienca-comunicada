@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home, LayoutGrid, User, Users, Server, X } from 'lucide-react';
+import { Home, LayoutGrid, User, Users, Server, Film, X } from 'lucide-react';
 import clsx from 'clsx';
 
 const navItems = [
@@ -7,6 +7,7 @@ const navItems = [
   { label: 'Módulos',        path: '/app/modulos',        icon: LayoutGrid  },
   { label: 'Meu Painel',     path: '/app/painel',         icon: User        },
   { label: 'Hubs',           path: '/app/hubs',           icon: Users       },
+  { label: 'Mídias',         path: '/app/midias',         icon: Film        },
   { label: 'Infraestrutura', path: '/app/infraestrutura', icon: Server      },
 ];
 

@@ -124,6 +124,53 @@ export const PILLARS: PillarData[] = [
 
 export const PLATFORM_SLOGAN = 'Ecossistema colaborativo de comunicação da ciência.';
 
+// ── REDES SOCIAIS / SAIU NAS REDES ────────────────────────────────────────
+// Atualize os videoId com os IDs reais dos seus vídeos.
+// YouTube → o código após ?v= na URL  |  TikTok → número no final de /video/  |  Instagram → código após /reel/ ou /p/
+export interface SocialVideo {
+  id: string;
+  platform: 'youtube' | 'tiktok' | 'instagram';
+  videoId: string;
+  title: string;
+  channel: string;
+  date: string;
+}
+
+export const SOCIAL_VIDEOS: SocialVideo[] = [
+  {
+    id: 'sv1',
+    platform: 'youtube',
+    videoId: 'COLOQUE_O_ID_AQUI',
+    title: 'Como comunicar ciência para diferentes públicos',
+    channel: '@cienciacomunicada',
+    date: 'Mai 2026',
+  },
+  {
+    id: 'sv2',
+    platform: 'tiktok',
+    videoId: 'COLOQUE_O_ID_AQUI',
+    title: 'Cientistas negras que mudaram o Brasil',
+    channel: '@cienciacomunicada',
+    date: 'Mai 2026',
+  },
+  {
+    id: 'sv3',
+    platform: 'youtube',
+    videoId: 'COLOQUE_O_ID_AQUI',
+    title: 'Mulheres na ciência: histórias e perspectivas',
+    channel: '@cienciacomunicada',
+    date: 'Abr 2026',
+  },
+  {
+    id: 'sv4',
+    platform: 'instagram',
+    videoId: 'COLOQUE_O_ID_AQUI',
+    title: 'Interseccionalidade e produção científica',
+    channel: '@cienciacomunicada',
+    date: 'Abr 2026',
+  },
+];
+
 export interface MainPillar {
   id: string;
   number: string;

@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, Play, LineChart, UserCheck, GraduationCap, Radio, Network, type LucideIcon } from 'lucide-react';
+import { ArrowRight, BookOpen, Play, LineChart, UserCheck, GraduationCap, Radio, Network, ExternalLink, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import {
   TAGLINES,
@@ -7,10 +8,12 @@ import {
   EXPERIENCE_STEPS,
   MODULOS,
   MAIN_PILLARS,
+  SOCIAL_VIDEOS,
   PLATFORM_SLOGAN,
   type ExperienceStep,
   type ModuloData,
   type MainPillar,
+  type SocialVideo,
 } from '../constants/platform';
 
 const STEP_ICON_MAP: Record<ExperienceStep['iconName'], LucideIcon> = {
@@ -25,6 +28,83 @@ const MODULE_COLOR_MAP: Record<ModuloData['colorKey'], { dot: string; text: stri
 
 const PILLAR_ICON_MAP: Record<MainPillar['iconName'], LucideIcon> = {
   GraduationCap, Radio, Network,
+};
+
+// ── SAIU NAS REDES — card individual ──────────────────────────────────────
+const PLATFORM_CHIP: Record<SocialVideo['platform'], string> = {
+  youtube:   'bg-red-50 text-red-600',
+  tiktok:    'bg-slate-900 text-white',
+  instagram: 'bg-pink-50 text-pink-600',
+};
+const PLATFORM_LABEL: Record<SocialVideo['platform'], string> = {
+  youtube: 'YouTube', tiktok: 'TikTok', instagram: 'Instagram',
+};
+
+const getEmbedUrl = (v: SocialVideo) => {
+  if (v.platform === 'youtube')   return `https://www.youtube.com/embed/${v.videoId}?rel=0&autoplay=1`;
+  if (v.platform === 'tiktok')    return `https://www.tiktok.com/embed/v2/${v.videoId}`;
+  return `https://www.instagram.com/reel/${v.videoId}/embed/`;
+};
+
+const SocialCard = ({ video }: { video: SocialVideo }) => {
+  const [playing, setPlaying] = useState(false);
+  const thumbUrl = video.platform === 'youtube'
+    ? `https://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`
+    : null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="group bg-white rounded-2xl overflow-hidden border border-slate-100 hover:border-slate-200 hover:shadow-md transition-all"
+    >
+      {/* Área do vídeo — 16:9 fixo para visual uniforme */}
+      <div className="relative aspect-video bg-cc-ink overflow-hidden">
+        {playing ? (
+          <iframe
+            src={getEmbedUrl(video)}
+            className="absolute inset-0 w-full h-full"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            allowFullScreen
+            title={video.title}
+          />
+        ) : (
+          <button
+            onClick={() => setPlaying(true)}
+            className="absolute inset-0 w-full h-full"
+            aria-label={`Reproduzir: ${video.title}`}
+          >
+            {thumbUrl && (
+              <img
+                src={thumbUrl}
+                alt={video.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            )}
+            <div className="absolute inset-0 bg-cc-ink/40 flex items-center justify-center">
+              <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center transition-transform group-hover:scale-110">
+                <Play size={22} className="text-white ml-1" fill="white" />
+              </div>
+            </div>
+          </button>
+        )}
+      </div>
+
+      {/* Info */}
+      <div className="p-4">
+        <div className="flex items-center justify-between mb-2">
+          <span className={`text-[10px] font-bold px-2 py-1 rounded-md ${PLATFORM_CHIP[video.platform]}`}>
+            {PLATFORM_LABEL[video.platform]}
+          </span>
+          <span className="text-xs text-slate-400">{video.date}</span>
+        </div>
+        <h4 className="font-semibold text-slate-800 text-sm leading-snug">{video.title}</h4>
+        <p className="text-xs text-slate-400 mt-1">{video.channel}</p>
+      </div>
+    </motion.div>
+  );
 };
 
 const LandingPage = () => (
@@ -302,6 +382,43 @@ const LandingPage = () => (
             Entrar na Plataforma <ArrowRight size={17} />
           </Link>
         </div>
+      </div>
+    </section>
+
+    {/* ── SAIU NAS REDES ────────────────────────────────────────────── */}
+    <section className="py-16 sm:py-20 md:py-24 bg-cc-cream border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <div className="flex flex-wrap items-end justify-between gap-4 mb-10 sm:mb-14">
+          <div>
+            <p className="text-xs font-bold tracking-widest text-cc-teal uppercase mb-3">
+              Nas Redes Sociais
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl font-black text-cc-ink">
+              Saiu nas Redes
+            </h2>
+            <p className="text-slate-500 text-sm mt-2">
+              Últimas produções da Ciência Comunicada no YouTube, TikTok e Instagram.
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://youtube.com/@cienciacomunicada"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-bold text-cc-purple hover:text-cc-ink transition-colors"
+            >
+              Ver canal <ExternalLink size={14} />
+            </a>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          {SOCIAL_VIDEOS.map((video) => (
+            <SocialCard key={video.id} video={video} />
+          ))}
+        </div>
+
       </div>
     </section>
   </>

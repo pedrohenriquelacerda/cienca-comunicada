@@ -9,6 +9,7 @@ import Modulos from './screens/Modulos'
 import PainelAluna from './screens/PainelAluna'
 import Hubs from './screens/Hubs'
 import Infraestrutura from './screens/Infraestrutura'
+import Midias from './screens/Midias'
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/app/modulos" element={<PlatformLayout><Modulos /></PlatformLayout>} />
                 <Route path="/app/painel" element={<PlatformLayout><PainelAluna /></PlatformLayout>} />
                 <Route path="/app/hubs" element={<PlatformLayout><Hubs /></PlatformLayout>} />
+                <Route path="/app/midias" element={<PlatformLayout><Midias /></PlatformLayout>} />
                 <Route path="/app/infraestrutura" element={<PlatformLayout><Infraestrutura /></PlatformLayout>} />
             </Routes>
         </BrowserRouter>
